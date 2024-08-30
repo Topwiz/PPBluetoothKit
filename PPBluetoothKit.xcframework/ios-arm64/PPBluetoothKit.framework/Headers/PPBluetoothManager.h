@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (BOOL)hasBidirectionalFunc:(PPDeviceFuncType)funcType;
 
++ (BOOL)hasLightFunc:(PPDeviceFuncType)funcType;
 
 + (void)loadDeviceWithJsonData:(NSArray *)jsonDicDataArray;
 

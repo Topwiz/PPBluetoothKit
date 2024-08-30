@@ -46,9 +46,13 @@ typedef NS_ENUM(NSUInteger, PPBluetoothAppleWifiConfigState) {
 
 - (void)fetchDeviceHistoryData;
 
-- (void)deleteDeviceHistoryData;
+/// 删除历史数据
+///  - status 0 : 成功，1 : 失败
+- (void)deleteDeviceHistoryDataWithHandler:(void(^)(NSInteger status))handler;
 
-- (void)syncDeviceTime;
+/// 同步时间
+///  - status 0 : 成功，1 : 失败
+- (void)syncDeviceTimeWithHandler:(void(^)(NSInteger status))handler;
 
 - (void)fetchDeviceBatteryInfo;
 
@@ -81,6 +85,16 @@ typedef NS_ENUM(NSUInteger, PPBluetoothAppleWifiConfigState) {
 /// 查询wifi参数
 /// - Parameter handler:
 - (void)queryWifiConfigWithHandler:(void (^)(PPWifiInfoModel * _Nullable))handler;
+
+/// 断开设备蓝牙连接
+- (void)disconnectDevice;
+
+/// 查询设备时间
+- (void)queryDeviceTime:(void(^)(NSString* deviceTime))handler;
+
+/// 删除Wi-Fi参数
+///  status 0：成功，1：失败
+- (void)deleteWIFI:(void(^)(NSInteger status))handler;
 
 @end
 

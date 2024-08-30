@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)colorModeWithLightEnable:(BOOL)lightEnable lightMode:(NSInteger)lightMode normalColor:(NSString *)normalColor gainColor:(NSString *)gainColor lossColor:(NSString *)lossColor;
 
-- (NSArray *)bodyData7Days:(NSArray <PPUserRecentBodyData *> *)recentData type:(PPUserBodyDataType)type user:(PPTorreSettingModel *)userModel;
+- (NSArray *)bodyData7Days:(NSArray <PPUserRecentBodyData *> *)recentData type:(PPUserBodyDataType)type lastRecentBodyData:(PPUserRecentBodyData*)lastBodyData user:(PPTorreSettingModel *)userModel;
 
 @end
 

@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 获取组包中的历史数据--新协议
 + (NSArray<PPBluetoothScaleBaseModel *> *)cf597HistorysWithTotalData:(NSData *)totalData;
 
++ (NSString *)dateStrWithYear:(int)year mounth:(int)mounth day:(int)day hour:(int)hour minite:(int)minite second:(int)secound;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -327,7 +327,7 @@ transferContinueStatus:(NSInteger)transferContinueStatus
 - (void)getRGBModeHandler:(void(^)(BOOL lightEnable,Borre608LightMode lightMode,NSString *normalColor,NSString *gainColor,NSString *lossColor))handler;
 
 /// 同步最近7天身体数据
-- (void)syncLast7DaysData608:(NSArray <PPUserRecentBodyData *> *)recentList type:(PPUserBodyDataType)type user:(PPTorreSettingModel *)userModel  handler:(void(^)(int status))handler;
+- (void)syncLast7DaysData608:(NSArray <PPUserRecentBodyData *> *)recentList lastRecentBodyData:(PPUserRecentBodyData*)lastBodyData type:(PPUserBodyDataType)type user:(PPTorreSettingModel *)userModel  handler:(void(^)(int status))handler;
 
 @end
 

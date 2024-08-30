@@ -8,12 +8,13 @@
 #import <Foundation/Foundation.h>
 #import "PPBluetoothAdvDeviceModel.h"
 #import "PPBluetoothScaleBaseModel.h"
+#import "PPAnalysisResultModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PPBluetoothBorreDataAnalysis : NSObject
 
-+ (PPBluetoothScaleBaseModel *)analysisData:(NSData *)receiveDate;
++ (PPAnalysisResultModel *)analysisData:(NSData *)receiveDate;
 
 + (NSArray <PPBluetoothScaleBaseModel *>*)torreHistoryWithData:(NSData *)data;
 @end

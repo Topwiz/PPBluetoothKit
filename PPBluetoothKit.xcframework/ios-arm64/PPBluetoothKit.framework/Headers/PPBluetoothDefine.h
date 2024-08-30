@@ -79,6 +79,7 @@ typedef NS_OPTIONS(NSUInteger, PPDeviceFuncType) {
     PPDeviceFuncTypeTime = 1 << 8, // 时钟
     PPDeviceFuncTypeKeyVoice = 1 << 9, // 按键音量
     PPDeviceFuncTypeBidirectional = 1 << 10, // 双向广播
+    PPDeviceFuncTypeLight = 1 << 11, // 双向广播
 
 
 };
@@ -153,5 +154,75 @@ typedef NS_ENUM(NSUInteger, PPDevicePeripheralType) {
     //Dorre /连接 /人体秤
     PPDevicePeripheralTypePeripheralDorre,
 };
+
+/// 抓零状态
+typedef NS_ENUM(NSUInteger, PPScaleCaptureZeroType) {
+    // 抓零中
+    PPScaleCaptureZeroTypeProcessing = 0,
+    // 抓零成功
+    PPScaleCaptureZeroTypeZeroSuccess,
+};
+
+/// 心率测量状态
+typedef NS_ENUM(NSUInteger, PPScaleHeartRateType) {
+    //心率未测量
+    PPScaleHeartRateTypeNotMeasured = 0,
+    //心率测量中
+    PPScaleHeartRateTypeMeasuring,
+    //心率测量成功
+    PPScaleHeartRateTypeMeasureSuccess,
+    //心率测量失败
+    PPScaleHeartRateTypeMeasureFail
+};
+
+/// 阻抗测量状态
+typedef NS_ENUM(NSUInteger, PPScaleImpedanceType) {
+    //阻抗未测量
+    PPScaleImpedanceTypeNotMeasured = 0,
+    //阻抗测量中
+    PPScaleImpedanceTypeMeasuring,
+    //阻抗成功
+    PPScaleImpedanceTypeMeasureSuccess,
+    //阻抗失败
+    PPScaleImpedanceTypeMeasureFail
+};
+
+/// 测量模式
+typedef NS_ENUM(NSUInteger, PPScaleMeasureModeType) {
+    //测量模式
+    PPScaleMeasureModeTypeMeasure = 0,
+    //标定模式
+    PPScaleMeasureModeTypeCalibration
+};
+
+/// 测量结果
+typedef NS_ENUM(NSUInteger, PPScaleMeasureResultType) {
+    // 测量未完成
+    PPScaleMeasureResultTypeProcessing = 0,
+    // 测量完成
+    PPScaleMeasureResultTypeCompleted
+};
+
+/// 电源状态
+typedef NS_ENUM(NSUInteger, PPScalePowerType) {
+    // 开机
+    PPScalePowerTypePowerOn = 0,
+    // 关机
+    PPScalePowerTypePowerOff
+};
+
+
+/// 重量状态
+typedef NS_ENUM(NSUInteger, PPScaleWeightType) {
+    // 实时重量
+    PPScaleWeightTypeProcessing = 0,
+    // 稳定重量
+    PPScaleWeightTypeLock,
+    // 超重
+    PPScaleWeightTypeOverweight,
+    // 离秤
+    PPScaleWeightTypeLeaveScale
+};
+
 
 #endif /* PPBluetoothDefine_h */

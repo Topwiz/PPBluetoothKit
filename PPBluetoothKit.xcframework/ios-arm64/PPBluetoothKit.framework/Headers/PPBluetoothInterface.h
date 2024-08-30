@@ -8,8 +8,9 @@
 #ifndef PPBluetoothInterface_h
 #define PPBluetoothInterface_h
 
-
+#import "PPScaleState.h"
 #import "PPBluetoothDefine.h"
+
 
 @class PPBluetoothAdvDeviceModel;
 @class CBPeripheral;
@@ -71,13 +72,15 @@
 
 - (void)monitorLockData:(PPBluetoothScaleBaseModel*)model advModel:(PPBluetoothAdvDeviceModel*)advModel;
 
+
 @optional
 
 - (void)monitorHistoryData:(PPBluetoothScaleBaseModel *)model advModel:(PPBluetoothAdvDeviceModel*)advModel;
 
 - (void)monitorBatteryInfoChange:(PPBatteryInfoModel *)model advModel:(PPBluetoothAdvDeviceModel*)advModel;
 
-
+/// Torre、Borre、Dorre 获取当前设备的实时状态，请勿缓存
+- (void)monitorScaleState:(PPScaleState *)scaleState;
 
 
 @end
