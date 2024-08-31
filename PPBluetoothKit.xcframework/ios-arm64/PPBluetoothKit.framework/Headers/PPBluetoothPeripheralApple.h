@@ -96,6 +96,10 @@ typedef NS_ENUM(NSUInteger, PPBluetoothAppleWifiConfigState) {
 ///  status 0：成功，1：失败
 - (void)deleteWIFI:(void(^)(NSInteger status))handler;
 
+
+/// 查询配置的DNS，即服务器域名
+- (void)queryDNSWithHandler:(void(^)(NSString* DNS))handler;
+
 @end
 
 NS_ASSUME_NONNULL_END
