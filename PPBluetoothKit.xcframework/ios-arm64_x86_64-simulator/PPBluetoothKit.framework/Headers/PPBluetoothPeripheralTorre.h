@@ -1,5 +1,5 @@
 //
-//  PPBluetoothPeripheralBorre.h
+//  PPBluetoothPeripheralTorre.h
 //  PPBluetoothKit
 //
 //  Created by 彭思远 on 2023/4/10.
@@ -7,31 +7,31 @@
 
 #import <Foundation/Foundation.h>
 #import "PPBluetoothDefine.h"
+#import "PPTorreSettingModel.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "PPBluetoothAdvDeviceModel.h"
 #import "PPBluetooth180ADeviceModel.h"
 #import "PPBluetoothInterface.h"
+//#import "PPBluetoothDeviceSettingModel.h"
 #import "PPTorreDFUPackageModel.h"
 #import "PPTorreDFUDataModel.h"
 #import "PPWifiInfoModel.h"
-#import <UIKit/UIKit.h>
 #import <PPBaseKit/PPBaseKit.h>
-#import "PPUserRecentBodyData.h"
-#import "PPTorreSettingModel.h"
-#import "PPTorreSettingModel+Borre.h"
-#import "PPBatteryInfoModel.h"
 
-typedef NS_ENUM(NSUInteger, Borre608LightMode) {
-    Borre608LightModeBreathing = 0,
-    Borre608LightModeAlways = 1,
-    
+typedef NS_ENUM(NSUInteger, PPTorreLanguage) {
+    PPTorreLanguageSimplifiedChinese = 0, // 中文简体
+    PPTorreLanguageEnglish = 1, // 英文
+    PPTorreLanguageTraditionalChinese = 2, // 中文繁体
+    PPTorreLanguageJapanese = 3, // 日语
+    PPTorreLanguageSpanish = 4, // 西班牙语
+    PPTorreLanguagePortuguese = 5, // 葡萄牙语
+    PPTorreLanguageArabic = 6, // 阿拉伯语
+    PPTorreLanguageKorean = 7 // 韩语
 };
-
-
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PPBluetoothPeripheralBorre : NSObject
+@interface PPBluetoothPeripheralTorre : NSObject
 
 @property (nonatomic, weak) id<PPBluetoothServiceDelegate> serviceDelegate;
 
@@ -48,6 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)discoverDeviceInfoService:(void(^)(PPBluetooth180ADeviceModel *deviceModel))deviceInfoResponseHandler;
 
 - (void)discoverFFF0Service;
+
 
 #pragma mark - code
 
@@ -195,7 +196,6 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - 用户数据相关
 
 
-
 /// 同步用户列表给设备 - 设备中如果有此用户会更新用户信息，若没有会插入给设备
 /// - Parameters:
 ///   - infos: 用户列表 - 对象中的每个属性都要赋值
@@ -225,14 +225,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)dataDeleteUser:(PPTorreSettingModel *)userModel withHandler:(void(^)(NSInteger status))handler;
 
 
-/// 获取设备端用户ID列表
+/// 获取设备端用户列表
 /// - Parameter handler: 返回设备端所有用户的userId
 - (void)dataFetchUserID:(void(^)(NSArray <NSString *>* infos))handler;
-
-/// 获取设备端用户信息列表
-/// - Parameter handler: 返回设备端所有用户的信息
-- (void)dataFetchUserInfoList:(void(^)(NSArray <PPTorreSettingModel *>* infos))handler;
-
 
 #pragma mark - 配网相关
 
@@ -311,29 +306,36 @@ NS_ASSUME_NONNULL_BEGIN
 ///   - version: 当前DFU文件的云端版本号
 ///   - handler: 成功回调
 - (void)dataDFUSend:(PPTorreDFUPackageModel *)packageModel
-               maxPacketSize:(NSInteger)maxPacketSize
+      maxPacketSize:(NSInteger)maxPacketSize
 transferContinueStatus:(NSInteger)transferContinueStatus
-                mcuVersion:(NSString *)mcuVersion
-          bleVersion:(NSString *)bleVersion
-          wifiVersion:(NSString *)wifiVersion
-        resVersion:(NSString *)resVersion
+      deviceVersion:(NSString *)version
             handler:(void(^)(CGFloat progress, BOOL isSuccess))handler;
 
+/// 启动本地升级
+///  status 0成功  1失败
+- (void)startLocalUpdateWithHandle:(void(^)(NSInteger status))handler;
 
-/// 设置RGB显示模式
-/// - Parameters:
-///   - lightEnable: 灯使能
-///   - lightMode: 灯模式
-///   - normalColorModel:default模式RGB值
-///   - gainColor:增重模式RGB值
-///   - lossColor:减重模式RGB值
-///   - handler: status  0:成功 1:失败
-- (void)setRGBMode:(BOOL)lightEnable lightMode:(Borre608LightMode)lightMode normalColor:(NSString *)normalColor gainColor:(NSString *)gainColor lossColor:(NSString *)lossColor handler:(void(^)(int status))handler;
-/// 查询RGB显示模式
-- (void)getRGBModeHandler:(void(^)(BOOL lightEnable,Borre608LightMode lightMode,NSString *normalColor,NSString *gainColor,NSString *lossColor))handler;
+#pragma mark - 产线 Production line
+/// 打开阻抗测试模式（产线使用）
+/// - Parameter handler: 0设置成功 1设置失败
+- (void)openImpedanceTestMode:(void(^)(NSInteger status))handler;
 
-/// 同步最近7天身体数据
-- (void)syncLast7DaysData608:(NSArray <PPUserRecentBodyData *> *)recentList lastRecentBodyData:(PPUserRecentBodyData*)lastBodyData type:(PPUserBodyDataType)type user:(PPTorreSettingModel *)userModel  handler:(void(^)(int status))handler;
+/// 关闭阻抗测试模式（产线使用）
+/// - Parameter handler: 0设置成功 1设置失败
+- (void)closeImpedanceTestMode:(void(^)(NSInteger status))handler;
+
+/// 获取阻抗测试模式（产线使用）
+/// - Parameter handler: 0打开 1关闭
+- (void)fetchImpedanceTestMode:(void(^)(NSInteger status))handler;
+
+/// 设置设备语言
+/// - Parameter handler: 0成功 1失败
+- (void)setLanguage:(PPTorreLanguage)language completion:(void(^)(NSInteger status))completion;
+
+/// 获取设备语言
+/// - Parameter status: 0成功 1失败
+/// - Parameter language: 设备语言
+- (void)getLanguageWithCompletion:(void(^)(NSInteger status, PPTorreLanguage language))completion;
 
 /// 获取电量
 - (void)fetchDeviceBatteryInfoWithCompletion:(void(^)(PPBatteryInfoModel *batteryInfo))completion;
