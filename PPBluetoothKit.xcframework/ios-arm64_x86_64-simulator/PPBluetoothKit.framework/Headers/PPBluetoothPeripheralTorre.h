@@ -81,9 +81,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)codeUpdateMTU:(void(^)(NSInteger status))handler;
 
 
-/// 同步设备时间
+/// 同步设备时间（默认 24 小时制）
 /// - Parameter handler: 0设置成功 1设置失败
 - (void)codeSyncTime:(void(^)(NSInteger status))handler;
+
+/// 同步设备时间，支持设备时间格式（12/24小时制）
+/// - Parameter handler: 0设置成功 1设置失败
+- (void)codeSyncTimeWithTimeFormat:(PPTimeFormat)timeFormat handler:(void(^)(NSInteger status))handler;
 
 /// 获取设备单位
 /// - Parameter handler:

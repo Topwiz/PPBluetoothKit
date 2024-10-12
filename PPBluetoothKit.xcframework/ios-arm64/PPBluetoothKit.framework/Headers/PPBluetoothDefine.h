@@ -81,7 +81,7 @@ typedef NS_OPTIONS(NSUInteger, PPDeviceFuncType) {
     PPDeviceFuncTypeBidirectional = 1 << 10, // 双向广播
     PPDeviceFuncTypeLight = 1 << 11, // 双向广播
     PPDeviceFuncTypeUserInfo = 1 << 12, // 下发用户信息功能
-
+    PPDeviceFuncTypeTimeFormat = 1 << 13, // 时间制式(12/24小时制)
 
 };
 
@@ -223,6 +223,21 @@ typedef NS_ENUM(NSUInteger, PPScaleWeightType) {
     PPScaleWeightTypeOverweight,
     // 离秤
     PPScaleWeightTypeLeaveScale
+};
+
+// 设备功能类型
+typedef NS_ENUM(NSInteger, PPTimeFormat) {
+    PPTimeFormat24HourClock = 0, // 24小时制
+    PPTimeFormat12HourClock = 1, // 12小时制
+    
+};
+
+// 头像类型
+typedef NS_ENUM(NSInteger, PPAvatarTypeType) {
+    
+    PPAvatarTypeTypeTorreV1 = 0, // 第1套头像
+    PPAvatarTypeTypeTorreV2, // 第2套头像
+
 };
 
 

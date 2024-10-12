@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PPTorreSettingModel.h"
+#import "PPBluetoothDefine.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - fff1
 - (NSString *)changeUnitCMD:(PPDeviceUnit)unit;
 
-- (NSString *)syncTimeCMD;
+- (NSString *)syncTimeCMD:(PPTimeFormat) timeFormat;
 
 
 #pragma mark - fff2
